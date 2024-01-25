@@ -2,6 +2,7 @@
 
 body {
   font-family: "IBM Plex Sans Thai", sans-serif;
+  padding: 10px;
 }
 
 #result {
