@@ -59,29 +59,31 @@ const words = [
 
 let selectedWord = "";
 let guessedWord = [];
-let incorrectGuesses = 0;
-const maxIncorrectGuesses = 6;
+let incorrectGuesses = 6;
 
-// Function to start a new game
+const wordElement = document.getElementById("word");
+const lettersElement = document.getElementById("letters");
+const messageElement = document.getElementById("message");
+const playAgainButton = document.getElementById("playAgain");
+const keyboard = document.getElementById("keyboard");
+
 function newGame() {
-  selectedWord = words[Math.floor(Math.random() * words.length)];
+  selectedWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
   guessedWord = Array(selectedWord.length).fill("_");
-  incorrectGuesses = 0;
+  incorrectGuesses = 6;
 
   updateDisplay();
 }
 
-// Function to update the display
 function updateDisplay() {
-  document.getElementById("word").innerText = guessedWord.join(" ");
-  document.getElementById("letters").innerHTML = generateAlphabetButtons();
-  document.getElementById("message").innerText = "";
-  document.getElementById("playAgain").style.display = "none";
+  wordElement.innerHTML = guessedWord.join(" ");
+  lettersElement.innerHTML = generateAlphabetButtons();
+  messageElement.innerHTML = "";
+  playAgainButton.style.display = "none";
 }
 
-// Function to generate alphabet buttons
 function generateAlphabetButtons() {
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let buttonsHTML = "";
 
   for (let letter of alphabet) {
@@ -91,41 +93,38 @@ function generateAlphabetButtons() {
   return buttonsHTML;
 }
 
-// Function to handle a guess
 function guess(letter) {
+  letter = letter.toUpperCase();
+
   if (selectedWord.includes(letter)) {
     for (let i = 0; i < selectedWord.length; i++) {
       if (selectedWord[i] === letter) {
-        guessedWord[i] = letter;
+        guessedWord[i] = letter.toLowerCase();
       }
     }
   } else {
-    incorrectGuesses++;
+    incorrectGuesses--;
   }
 
+  updateDisplay(); // Add this line to update the display after a guess
   checkGameStatus();
 }
 
-// Function to check the game status (win/lose)
 function checkGameStatus() {
-  if (guessedWord.join("") === selectedWord) {
-    document.getElementById("message").innerText =
-      "Congratulations! You guessed the word!";
-    document.getElementById("playAgain").style.display = "block";
-  } else if (incorrectGuesses >= maxIncorrectGuesses) {
-    document.getElementById(
-      "message"
-    ).innerText = `Sorry, you lost. The correct word was "${selectedWord}".`;
-    document.getElementById("playAgain").style.display = "block";
+  if (!guessedWord.includes("_")) {
+    messageElement.innerHTML = "Congratulations! You guessed the word!";
+    playAgainButton.style.display = "block";
+  } else if (incorrectGuesses === 0) {
+    messageElement.innerHTML = `Game Over. The correct word was "${selectedWord.toLowerCase()}".`;
+    playAgainButton.style.display = "block";
   } else {
     updateDisplay();
   }
 }
 
-// Function to reset the game
 function resetGame() {
   newGame();
 }
 
-// Start a new game when the page loads
-window.onload = newGame;
+// Initial game setup
+newGame();
