@@ -6,11 +6,23 @@
   <link rel="stylesheet" href="style.css" />
   <body>
     <h1>ณ ร้านขายผัก - ผลไม้ร้านหนึ่ง</h1>
-    <div id="result">
-      <h4 id="showname">Name:</h4>
-      <h4>Fruits:</h4>
-      <h4>Total Cost:</h4>
-      <h4>Sorted by Price:</h4>
+    <div id="result">ใส่คำตอบตรงนี้
+      <div id="result"> <!-- เป็นการโชว์ข้อมูลต่างๆตามที่ต้องการ -->
+        <h1>Show Data</h1> <!--การแสดงข้อมูล-->
+        <p>Name : <span id="result1"></span></p> <!--แสดงชื่อทั้งหมด-->
+        <p>Fruits : <span id="result2"></span></p> <!--แสดงชื่อมชทั้งหมดที่เป็นผลไม้-->
+        <p>Total Cost : <span id="result3"></span></p> <!--แสดงราคารวมทั้งหมด-->
+        <p>Sorted by Price : <span id="result4"></span></p> <!--แสดงเรียงลำดับชื่อตามราคา-->
+        <p>Cucumber Details : <span id="result5"></span></p><!--แสดงข้อมูลของ Cucumber-->
+      </div>
+      <div id="result">
+        <h1>ตอบคำถามเพิ่มเติม</h1>
+        <p>ราคารวมของผลไม้ทั้งหมด : <span id="result6"></span></p>
+        <p>ผลไม้ที่ราคาถูกที่สุด : <span id="result7"></span></p>
+        <p>รายชื่อผลไม้และราคาที่เรียงลำดับตามชื่อ : <span id="result8"></span></p>
+        <p>คำนวณราคาเฉลี่ยของผัก : <span id="result9"></span></p>
+        <p>สร้างรายการผักที่ราคามากกว่า $1 และเรียงตามราคาจากสูงไปต่ำ : <span id="result10"></span></p>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
